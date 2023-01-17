@@ -23,7 +23,7 @@ pub fn main() !void {
         defer input.deinit();
         _ = try stdin.readUntilDelimiterOrEof(&buffer, '\n');
         try input.appendSlice(&buffer);
-        try stdout.print("{s}\n{s}", .{ rep(input).items, prompt });
+        try stdout.print("{s}{s}", .{ rep(input).items, prompt });
         try bw.flush();
     }
 }
@@ -35,7 +35,7 @@ fn read(in: ArrayList(u8)) ArrayList(u8) {
 test "read" {
     var in = ArrayList(u8).init(std.testing.allocator);
     defer in.deinit();
-    try in.appendSlice("go");
+    try in.appendSlice("read");
     try expectEqualStrings(in.items, read(in).items);
 }
 
@@ -46,7 +46,7 @@ fn eval(in: ArrayList(u8)) ArrayList(u8) {
 test "eval" {
     var in = ArrayList(u8).init(std.testing.allocator);
     defer in.deinit();
-    try in.appendSlice("go");
+    try in.appendSlice("eval");
     try expectEqualStrings(in.items, eval(in).items);
 }
 
@@ -56,7 +56,7 @@ fn print(in: std.ArrayList(u8)) ArrayList(u8) {
 test "print" {
     var in = ArrayList(u8).init(std.testing.allocator);
     defer in.deinit();
-    try in.appendSlice("go");
+    try in.appendSlice("print");
     try expectEqualStrings(in.items, print(in).items);
 }
 
@@ -67,7 +67,7 @@ fn rep(in: ArrayList(u8)) ArrayList(u8) {
 test "rep" {
     var in = ArrayList(u8).init(std.testing.allocator);
     defer in.deinit();
-    try in.appendSlice("go");
+    try in.appendSlice("rep");
     try expectEqualStrings(in.items, rep(in).items);
 }
 
